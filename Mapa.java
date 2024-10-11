@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Scanner;
 
 public class Mapa {
     private Ubicacion actual;
@@ -13,8 +14,19 @@ public class Mapa {
         this.ubicaciones.add(nuevaUbicacion);
     }
 
-    public void viajar(Ubicacion destino) {
-        if (this.actual.Viajar(destino)) {
+
+    public void viajar(){
+        System.out.println("A donde quieres viajar?");
+        this.actual.verViajes();
+        Scanner myObj = new Scanner(System.in);
+        int destino = myObj.nextInt();
+        this.viajarAUbicacion(destino);
+
+    }
+
+    private void viajarAUbicacion(int opcion) {
+        Ubicacion destino = this.actual.Viajar(opcion);
+        if (destino != null) {
             this.actual = destino;
             System.out.println("Viajaste a " + destino.getNombre() + "!");
         } else {

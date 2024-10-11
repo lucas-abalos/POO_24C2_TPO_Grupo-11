@@ -18,8 +18,16 @@ public class Ubicacion {
         this.adyacentes.add(nuevoAdyacente);
     }
 
-    public boolean Viajar(Ubicacion destino) {
-        return adyacentes.contains(destino);
+    public void verViajes() { 
+        int contador = 1;
+        for (Ubicacion destino : adyacentes) {
+            System.out.println(contador + " -- " + destino.getNombre());
+            contador++;
+        }
+    }
+
+    public Ubicacion Viajar(int destino) {
+        return this.adyacentes.get(destino - 1);
     }    
 
     public String getNombre(){
