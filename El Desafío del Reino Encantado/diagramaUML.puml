@@ -1,0 +1,118 @@
+@startuml reinoEncantado
+skinparam classAttributeIconSize 0
+
+class Jugador{
+- nivelExperiencia: int
+- heroe: Heroe
+- ubicacion: Ubicacion
++ viajarUbicacionNeutral(): Ubicacion
++ viajarUbicacionConCriatura(): Ubicacion
++ mejorarPersonaje(): boolean
++ recolectarRecompensa()
+}
+
+abstract class Personaje{
+- nombre: String
+- vida: int
+- nivelAtaque: int
+- nivelDefensa: int
++ mejorarAtaque(cantidad: int): boolean
++ mejorarDefensa(cantidad: int): boolean
++ estaVivo(): boolean
+}
+
+abstract class Heroe{
+- duenio : Jugador
++ ganoPelea(criatura: Criatura): void
+}
+
+abstract class Criatura{
+- nivel: int
+}
+
+class Mago{
++ usarHabilidadEspecialAtaque(personaje: Personaje, cantGolpes int): int
++ usarHabilidadEspecialDefensa(personaje: Personaje, cantGolpes int): int
++ ganoPelea(criatura: Criatura): void
+}
+
+class Guerrero{
++ usarHabilidadEspecialAtaque(personaje: Personaje, cantGolpes int): int
++ usarHabilidadEspecialDefensa(personaje: Personaje, cantGolpes int): int
++ ganoPelea(criatura: Criatura): void
+}
+
+class Arquero{
+- punteria: int
+- agilidad: int
++ usarHabilidadEspecialAtaque(personaje: Personaje, cantGolpes int): int
++ usarHabilidadEspecialDefensa(personaje: Personaje, cantGolpes int): int
++ ganoPelea(criatura: Criatura): void
+}
+
+class Dragon{
++ usarHabilidadEspecialAtaque(personaje: Personaje, cantGolpes int): int
++ usarHabilidadEspecialDefensa(personaje: Personaje, cantGolpes int): int
+}
+
+class Troll{
++ usarHabilidadEspecialAtaque(personaje: Personaje, cantGolpes int): int
++ usarHabilidadEspecialDefensa(personaje: Personaje, cantGolpes int): int
+}
+
+class Espectro{
++ usarHabilidadEspecialAtaque(personaje: Personaje, cantGolpes int): int
++ usarHabilidadEspecialDefensa(personaje: Personaje, cantGolpes int): int
+}
+
+interface Atacable{
++ usarHabilidadEspecialAtaque(personaje: Personaje, cantGolpes int): int
++ usarHabilidadEspecialDefensa(personaje: Personaje, cantGolpes int): int
+}
+
+class Pelea{
+-heroe: Heroe
+-criatura: Criatura
++ iniciarPelea(): boolean
++ turnoHeroe(cantGolpes: int): boolean
++ turnoCriatura(cantGolpes: int): boolean
++ atacar(atacante: Personaje, defensor: Personaje, cantGolpes: int): void
+}
+
+class Mapa{
+- ubicaciones: List<Ubicacion>
+}
+
+class Ubicacion{
+- nombre: String
+- criatura: Criatura
+- tesoro: Tesoro
++ ubicacionNeutral(): boolean
+}
+
+class Tesoro{
+- nombre: String
++ devolverDescripcion(): String
+}
+
+
+Jugador "1" o- "1" Heroe: controla
+Personaje <|-- Heroe
+Personaje <|-- Criatura
+Heroe <|-- Arquero
+Heroe <|-- Mago
+Heroe <|-- Guerrero
+Criatura <|-- Dragon
+Criatura <|-- Troll
+Criatura <|-- Espectro
+Heroe <-> Pelea: Lucha
+Pelea <-> Criatura: Lucha
+Heroe <|.. Atacable: implementa
+Criatura <|.. Atacable: implementa
+Mapa <-- Jugador: Acceso a Ubicaciones
+Jugador "1" -> "1" Ubicacion: Se encuentra
+Mapa "1" *- "1..*" Ubicacion: contiene
+Ubicacion "1" o--- "0..1" Criatura: contiene
+Ubicacion "1" o- "0..1" Tesoro: contiene
+
+@enduml
