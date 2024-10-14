@@ -13,28 +13,6 @@ public class Personaje {
         this.nivelDefensa = nivelDefensa;
     }
 
-    public boolean mejorarAtaque(int cantidad) {
-        if (cantidad > 0) {
-            nivelAtaque += cantidad;
-            System.out.println(nombre + " ha mejorado su ataque en " + cantidad + " puntos.");
-            return true;
-        } else {
-            System.out.println("Cantidad inválida para mejorar ataque.");
-            return false;
-        }
-    }
-
-    public boolean mejorarDefensa(int cantidad) {
-        if (cantidad > 0) {
-            nivelDefensa += cantidad;
-            System.out.println(nombre + " ha mejorado su defensa en " + cantidad + " puntos.");
-            return true;
-        } else {
-            System.out.println("Cantidad inválida para mejorar defensa.");
-            return false;
-        }
-    }
-
     public String getNombre() {
         return nombre;
     }
