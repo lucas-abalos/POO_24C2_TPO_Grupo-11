@@ -1,20 +1,34 @@
 package reino.modelo;
 
-public class Ubicacion {
-    private String nombre;
-    private Criatura criatura;
-    private Tesoro tesoro;
+import java.util.List;
 
-    public boolean ubicacionNeutral(){
-        return true;
+public abstract class Ubicacion {
+    protected String nombre;
+    protected List<Ubicacion> adyacentes;
+
+    public Ubicacion( String nombre , List<Ubicacion> adyacentes ){
+        this.nombre = nombre;
+        this.adyacentes = adyacentes;
     }
-    public String devuelveNombre(){
-        return nombre;
+
+    public void agregarAdyacente (Ubicacion nuevoAdyacente) {
+        this.adyacentes.add(nuevoAdyacente);
     }
-    public boolean tieneCriatura(){
-        return criatura != null;
+
+    public void verViajes() { 
+        int contador = 1;
+        for (Ubicacion destino : adyacentes) {
+            System.out.println(contador + " -- " + destino.getNombre());
+            contador++;
+        }
     }
-    public boolean tieneTesoro(){
-        return tesoro != null;
+
+    public Ubicacion Viajar(int destino){
+        return this.adyacentes.get(destino-1);
     }
+
+    public String getNombre(){
+        return this.nombre;
+    }
+    
 }
