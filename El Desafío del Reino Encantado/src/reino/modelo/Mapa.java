@@ -1,8 +1,11 @@
 package reino.modelo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+
+import static java.awt.AWTEventMulticaster.add;
 
 public class Mapa {
     private Ubicacion actual;
@@ -10,21 +13,35 @@ public class Mapa {
 
     public Mapa() {
         this.ubicaciones = new ArrayList<>();
-        Ubicacion puebloPaleta = new Ciudad( "Pueblo Paleta", new ArrayList<Ubicacion>(), "npc1") ;
-        Ubicacion ciudadVerde = new Ciudad( "Ciudad Verde", new ArrayList<Ubicacion>(), "npc1");
-        Ubicacion ciudadPlateada = new Ciudad("Ciudad Plateada", new ArrayList<Ubicacion>(), "npc1");
-        Ubicacion cuevaEspectros = new ZonaEnemiga("Cueva de espectros", new ArrayList<Ubicacion>() , new Espectro("pepe" , 5 , 2 , 3));
-        puebloPaleta.agregarAdyacente(ciudadVerde);
-        ciudadVerde.agregarAdyacente(ciudadPlateada);
-        ciudadVerde.agregarAdyacente(puebloPaleta);
-        ciudadVerde.agregarAdyacente(cuevaEspectros);
-        ciudadPlateada.agregarAdyacente(ciudadVerde);
-        cuevaEspectros.agregarAdyacente(ciudadPlateada);
-        this.actual = puebloPaleta;
-        this.agregarUbicacion(ciudadPlateada);
-        this.agregarUbicacion(ciudadVerde);
-        this.agregarUbicacion(puebloPaleta);
-        this.agregarUbicacion(cuevaEspectros);
+        Ubicacion puebloNeutral = new Ubicacion( "Pueblo Neutral", new ArrayList<Ubicacion>(), null , null ,null) ;
+
+        Dragon dragon = new Dragon("Dragon del Norte" , 15 , 20 , 120);
+        Recompensa recompensa1 = new Recompensa("Aumenta el ataque un 20%" , "Espada de Fuego" , 0 , 0, 0 , 0.2f);
+        Ubicacion montanaHelada = new Ubicacion("Montañas Heladas", new ArrayList<Ubicacion>() , new ArrayList<>(List.of(dragon)) , null, recompensa1);
+
+        Espectro espectro = new Espectro("Jeffrey Epstein" , 35 , 12 , 12);
+        Recompensa recompensa2 = new Recompensa("Aumenta la defensa en un 15%" , "Amuleto de Proteccion" , 0 , 0.15f, 0 , 0);
+        Ubicacion bosqueSusurros = new Ubicacion("Bosque susurros", new ArrayList<Ubicacion>() , new ArrayList<>(List.of(espectro)) , null, recompensa2);
+
+        Espectro enemigo1 = new Espectro("Mangieri" , 234 , 19 , 999);
+        Troll enemigo2 = new Troll("Diddy P" , 35 , 121 , 999);
+        Tesoro tesoro = new Tesoro("condicion VICTORIA");
+        Ubicacion mansionDiddy = new Ubicacion("La fiesta blanca", new ArrayList<Ubicacion>() , new ArrayList<>(List.of(enemigo1 , enemigo2)) , tesoro, null);
+
+        //Ubicacion cuevaEspectros = new Ubicacion("Cueva de espectros", new ArrayList<Ubicacion>() , new Espectro("pepe" , 5 , 2 , 3));
+
+        puebloNeutral.agregarAdyacente(montanaHelada);
+
+        puebloNeutral.agregarAdyacente(bosqueSusurros);
+        montanaHelada.agregarAdyacente(puebloNeutral);
+
+        bosqueSusurros.agregarAdyacente(puebloNeutral);
+        bosqueSusurros.agregarAdyacente(mansionDiddy);
+        this.actual = puebloNeutral;
+        this.agregarUbicacion(puebloNeutral);
+        this.agregarUbicacion(montanaHelada);
+        this.agregarUbicacion(bosqueSusurros);
+        this.agregarUbicacion(mansionDiddy);
     }
 
     public void agregarUbicacion(Ubicacion nuevaUbicacion) {
@@ -38,19 +55,34 @@ public class Mapa {
         System.out.println("A donde quieres viajar?");
         this.actual.verViajes();
         Scanner myObj = new Scanner(System.in);
-        int destino = myObj.nextInt();
-        this.viajarAUbicacion(destino);
+        try {
+            int destino = myObj.nextInt();
+            this.viajarAUbicacion(destino);
+        } catch (Exception e) {
+            throw new RuntimeException("Elija un destino valido!");
+        }
 
     }
 
     private void viajarAUbicacion(int opcion) {
         Ubicacion destino = this.actual.Viajar(opcion);
         if (destino != null) {
+            if (destino.getEnemigo() != null && destino.getEnemigo().getFirst().estaVivo()) {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("La ubicación elegida es hostil. ¿Seguro que desea viajar (Y)?: ");
+                String respuesta = scanner.nextLine().trim().toUpperCase(); // Convertir a mayúscula para evitar problemas de case
+
+                if (!"Y".equals(respuesta)) {
+                    System.out.println("Decides no viajar...");
+                    return;
+               }
+
+            }
+
             this.actual = destino;
             System.out.println("Te encuentras en " + this.actual.getNombre());
-
         } else {
-            System.out.println("No se puede viajar a " + actual.adyacentes.get(opcion-1).getNombre() + " desde aqui");
+            System.out.println("No se puede viajar a " + actual.getAdyacentes().get(opcion-1).getNombre() + " desde aqui");
         }
     }
 
