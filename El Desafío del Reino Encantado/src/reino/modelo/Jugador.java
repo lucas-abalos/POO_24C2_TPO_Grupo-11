@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Jugador {
     private int nivelExperiencia;
-    private Heroe heroe;
+    private final Heroe heroe;
     private List<Recompensa> recompensas;
 
     public Jugador(Heroe heroe) {

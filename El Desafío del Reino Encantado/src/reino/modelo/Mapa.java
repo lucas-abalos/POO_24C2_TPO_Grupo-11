@@ -1,32 +1,30 @@
 package reino.modelo;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import static java.awt.AWTEventMulticaster.add;
 
 public class Mapa {
     private Ubicacion actual;
-    private List<Ubicacion> ubicaciones;
+    private final List<Ubicacion> ubicaciones;
 
     public Mapa() {
         this.ubicaciones = new ArrayList<>();
-        Ubicacion puebloNeutral = new Ubicacion( "Pueblo Neutral", new ArrayList<Ubicacion>(), null , null ,null) ;
+        Ubicacion puebloNeutral = new Ubicacion( "Pueblo Neutral", new ArrayList<>(), null , null ,null) ;
 
-        Dragon dragon = new Dragon("Dragon del Norte" , 15 , 20 , 120);
-        Recompensa recompensa1 = new Recompensa("Aumenta el ataque un 20%" , "Espada de Fuego" , 0 , 0, 0 , 0.2f);
-        Ubicacion montanaHelada = new Ubicacion("Montañas Heladas", new ArrayList<Ubicacion>() , new ArrayList<>(List.of(dragon)) , null, recompensa1);
+        Dragon dragon = new Dragon("Drogon del Norte" , 15 , 20 , 120);
+        Recompensa recompensa1 = new Recompensa("Aumenta el ataque un 20%" , "Fentanilo" , 0 , 0, 0 , 0.2f);
+        Ubicacion montanaHelada = new Ubicacion("Montañas Heladas", new ArrayList<>() , new ArrayList<>(List.of(dragon)) , null, recompensa1);
 
         Espectro espectro = new Espectro("Jeffrey Epstein" , 35 , 12 , 12);
         Recompensa recompensa2 = new Recompensa("Aumenta la defensa en un 15%" , "Amuleto de Proteccion" , 0 , 0.15f, 0 , 0);
-        Ubicacion bosqueSusurros = new Ubicacion("Bosque susurros", new ArrayList<Ubicacion>() , new ArrayList<>(List.of(espectro)) , null, recompensa2);
+        Ubicacion bosqueSusurros = new Ubicacion("Bosque susurros", new ArrayList<>() , new ArrayList<>(List.of(espectro)) , null, recompensa2);
 
         Espectro enemigo1 = new Espectro("Mangieri" , 234 , 19 , 999);
         Troll enemigo2 = new Troll("Diddy P" , 35 , 121 , 999);
         Tesoro tesoro = new Tesoro("condicion VICTORIA");
-        Ubicacion mansionDiddy = new Ubicacion("La fiesta blanca", new ArrayList<Ubicacion>() , new ArrayList<>(List.of(enemigo1 , enemigo2)) , tesoro, null);
+        Ubicacion mansionDiddy = new Ubicacion("La fiesta blanca", new ArrayList<>() , new ArrayList<>(List.of(enemigo1 , enemigo2)) , tesoro, null);
 
         //Ubicacion cuevaEspectros = new Ubicacion("Cueva de espectros", new ArrayList<Ubicacion>() , new Espectro("pepe" , 5 , 2 , 3));
 
@@ -88,7 +86,4 @@ public class Mapa {
 
 
 
-    public List<Ubicacion> getUbicaciones() {
-        return this.ubicaciones;
-    }
 }
