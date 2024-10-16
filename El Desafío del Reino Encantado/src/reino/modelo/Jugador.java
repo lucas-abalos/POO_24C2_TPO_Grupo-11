@@ -9,13 +9,13 @@ public class Jugador {
     private Heroe heroe;
     private Ubicacion ubicacion;
     private List<Recompensa> recompensas;
+    private Mapa mapa = new Mapa();
 
-    public Ubicacion viajarUbicacionNeutral(){
-        return ubicacion; 
+    public void viajar(){
+        mapa.viajar();
+        this.ubicacion = mapa.getActual();
     }
-    public Ubicacion viajarUbicacionConCriatura(){
-        return ubicacion; 
-    }
+
     public void recolectarRecompensa(){
     }
     public int getNivelExperiencia(){
