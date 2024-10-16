@@ -6,18 +6,16 @@ import java.util.List;
 
 public class Jugador {
     private int nivelExperiencia;
-    private Heroe heroe;
-    private Ubicacion ubicacion;
+    private final Heroe heroe;
     private List<Recompensa> recompensas;
 
-    public Ubicacion viajarUbicacionNeutral(){
-        return ubicacion; 
+    public Jugador(Heroe heroe) {
+        this.nivelExperiencia = 0;
+        this.heroe = heroe;
+        this.recompensas = new ArrayList<>();
     }
-    public Ubicacion viajarUbicacionConCriatura(){
-        return ubicacion; 
-    }
-    public void recolectarRecompensa(){
-    }
+
+
     public int getNivelExperiencia(){
         return nivelExperiencia;
     }
@@ -32,6 +30,7 @@ public class Jugador {
         if (recompensa != null) {
             recompensas.add(recompensa);  // Añade la recompensa a la lista
         }
+        System.out.println("Conseguiste la siguiente recompensa: " + recompensa);
     }
 
     public void intercambiarRecompensas() {
@@ -44,18 +43,24 @@ public class Jugador {
             Recompensa recompensa = iterator.next();
     
             if(recompensa.getCantidadAtaque() > 0){
-                mejorarAtaqueHeroe(recompensa.getCantidadAtaque());
+                mejorarAtaqueHeroe(recompensa.getCantidadAtaque() , true);
             }
             if(recompensa.getPorcentajeAtaque() > 0){
                 int cantIncrementar = (int)(heroe.getNivelAtaque() * recompensa.getPorcentajeAtaque());
-                mejorarAtaqueHeroe(cantIncrementar);
+                if(cantIncrementar < 1) {
+                    cantIncrementar = 1;
+                }
+                mejorarAtaqueHeroe(cantIncrementar , true);
             }
             if(recompensa.getCantidadDefensa() > 0){
-                mejorarDefensaHeroe(recompensa.getCantidadDefensa());
+                mejorarDefensaHeroe(recompensa.getCantidadDefensa() , true);
             }
             if(recompensa.getPorcentajeDefensa() > 0){
                 int cantIncrementar = (int)(heroe.getNivelDefensa() * recompensa.getPorcentajeDefensa());
-                mejorarDefensaHeroe(cantIncrementar);
+                if (cantIncrementar < 1) {
+                    cantIncrementar = 1;
+                }
+                mejorarDefensaHeroe(cantIncrementar , true);
             }
             System.out.println("Se recolectó la recompensa: " + recompensa.getDescipcion());
             System.out.println("Esta otorgaba el siguiente premio: " + recompensa.getPremio());
@@ -66,9 +71,15 @@ public class Jugador {
 
     public void incrementarExperiencia(int cantidad){
         this.nivelExperiencia += cantidad;
+        System.out.println("Tu experiencia ha aumentado " + cantidad + " puntos! \nAhora tienes " + this.nivelExperiencia);
     }
 
-    public boolean mejorarAtaqueHeroe(int cantidad) {
+    public boolean mejorarAtaqueHeroe(int cantidad, boolean isRecompensa) {
+        if (isRecompensa) {
+            heroe.setNivelAtaque(heroe.getNivelAtaque() + cantidad);
+            System.out.println("Ha mejorado su defensa en " + cantidad + ". Alcanzando los " + heroe.getNivelDefensa() + " puntos.");
+            return true;
+        }
         if(cantidad > nivelExperiencia || cantidad <= 0){
             System.out.println("La cantidad ingresada es incorrecta o supera el nivel de experiencia actual, Nivel Experiencia actual: " + nivelExperiencia);
             return false;
@@ -76,12 +87,17 @@ public class Jugador {
         else{
             heroe.setNivelAtaque(heroe.getNivelAtaque() + cantidad);
             nivelExperiencia -= cantidad;
-            System.out.println("Ha mejorado su ataque en " + cantidad + ". Alcanzando los " + heroe.getNivelAtaque() + "puntos.");
+            System.out.println("Ha mejorado su ataque en " + cantidad + ". Alcanzando los " + heroe.getNivelAtaque() + " puntos.");
             return true;
         }
     }
 
-    public boolean mejorarDefensaHeroe(int cantidad) {
+    public boolean mejorarDefensaHeroe(int cantidad, boolean isRecompensa) {
+        if (isRecompensa) {
+            heroe.setNivelAtaque(heroe.getNivelAtaque() + cantidad);
+            System.out.println("Ha mejorado su defensa en " + cantidad + ". Alcanzando los " + heroe.getNivelDefensa() + " puntos.");
+            return true;
+        }
         if(cantidad > nivelExperiencia || cantidad <= 0){
             System.out.println("La cantidad ingresada es incorrecta o supera el nivel de experiencia actual, Nivel Experiencia actual: " + nivelExperiencia);
             return false;
@@ -89,7 +105,7 @@ public class Jugador {
         else{
             heroe.setNivelDefensa(heroe.getNivelDefensa() + cantidad);
             nivelExperiencia -= cantidad;
-            System.out.println("Ha mejorado su defensa en " + cantidad + ". Alcanzando los " + heroe.getNivelAtaque() + "puntos.");
+            System.out.println("Ha mejorado su defensa en " + cantidad + ". Alcanzando los " + heroe.getNivelDefensa() + " puntos.");
             return true;
         }
     }

@@ -9,7 +9,7 @@ public class Pelea {
         this.criatura = criatura;
     }
 
-    public boolean iniciarPelea() {
+    public void iniciarPelea() {
         System.out.println("¡La pelea ha comenzado!");
         boolean peleaEnCurso = true;
         int cantGolpesHeroe = 0;
@@ -24,12 +24,11 @@ public class Pelea {
         }
 
         if (heroe.getVida() <= 0) {
-            System.out.println("El héroe ha sido derrotado por la " + criatura.getNombre() + "!");
+            System.out.println("El héroe ha sido derrotado por la " + criatura.getNombre() + "!\n\nFIN DEL JUEGO");
         } else if (criatura.getVida() <= 0) {
             System.out.println("¡El héroe " + heroe.getNombre() + " ha derrotado a la " + criatura.getNombre() + "!");
             heroe.ganoPelea(criatura); 
         }
-        return heroe.getVida() > 0; // Si gano el heroe devuelvo True y sigue el curso del juego, si es false se termina la partida
     }
 
     private boolean turnoHeroe(int cantGolpes) {

@@ -35,4 +35,7 @@ public class Recompensa {
     public float getPorcentajeAtaque(){
         return porcentajeAtaque;
     }
+    public String toString() {
+        return this.premio + "\n" + this.descripcion;
+    }
 }
