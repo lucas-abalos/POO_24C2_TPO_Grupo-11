@@ -5,8 +5,7 @@ class Jugador{
 - nivelExperiencia: int
 - heroe: Heroe
 - ubicacion: Ubicacion
-+ viajarUbicacionNeutral(): Ubicacion
-+ viajarUbicacionConCriatura(): Ubicacion
+- recompensas: List<Recompensa>
 + mejorarPersonaje(): boolean
 + recolectarRecompensa()
 }
@@ -19,6 +18,8 @@ abstract class Personaje{
 + mejorarAtaque(cantidad: int): boolean
 + mejorarDefensa(cantidad: int): boolean
 + estaVivo(): boolean
++ usarHabilidadEspecialAtaque(personaje: Personaje, cantGolpes int): int
++ usarHabilidadEspecialDefensa(personaje: Personaje, cantGolpes int): int
 }
 
 abstract class Heroe{
@@ -31,43 +32,26 @@ abstract class Criatura{
 }
 
 class Mago{
-+ usarHabilidadEspecialAtaque(personaje: Personaje, cantGolpes int): int
-+ usarHabilidadEspecialDefensa(personaje: Personaje, cantGolpes int): int
 + ganoPelea(criatura: Criatura): void
 }
 
 class Guerrero{
-+ usarHabilidadEspecialAtaque(personaje: Personaje, cantGolpes int): int
-+ usarHabilidadEspecialDefensa(personaje: Personaje, cantGolpes int): int
 + ganoPelea(criatura: Criatura): void
 }
 
 class Arquero{
 - punteria: int
 - agilidad: int
-+ usarHabilidadEspecialAtaque(personaje: Personaje, cantGolpes int): int
-+ usarHabilidadEspecialDefensa(personaje: Personaje, cantGolpes int): int
 + ganoPelea(criatura: Criatura): void
 }
 
 class Dragon{
-+ usarHabilidadEspecialAtaque(personaje: Personaje, cantGolpes int): int
-+ usarHabilidadEspecialDefensa(personaje: Personaje, cantGolpes int): int
 }
 
 class Troll{
-+ usarHabilidadEspecialAtaque(personaje: Personaje, cantGolpes int): int
-+ usarHabilidadEspecialDefensa(personaje: Personaje, cantGolpes int): int
 }
 
 class Espectro{
-+ usarHabilidadEspecialAtaque(personaje: Personaje, cantGolpes int): int
-+ usarHabilidadEspecialDefensa(personaje: Personaje, cantGolpes int): int
-}
-
-interface Atacable{
-+ usarHabilidadEspecialAtaque(personaje: Personaje, cantGolpes int): int
-+ usarHabilidadEspecialDefensa(personaje: Personaje, cantGolpes int): int
 }
 
 class Pelea{
@@ -85,9 +69,20 @@ class Mapa{
 
 class Ubicacion{
 - nombre: String
-- criatura: Criatura
+- adyacentes: List<Ubicacion>
+- enemigos: Criatura
 - tesoro: Tesoro
+- recompensa: Recompensa
 + ubicacionNeutral(): boolean
+}
+
+class Recompensa {
+- descripcion: String
+- premio: String
+- cantidadDefensa: int
+- porcentajeDefensa: float
+- cantidadAtaque: int
+- porcentajeAtaque: float
 }
 
 class Tesoro{
@@ -95,8 +90,20 @@ class Tesoro{
 + devolverDescripcion(): String
 }
 
+class JuegoReino {
+- instancia: getInstancia()
+- mapa: Mapa
+- jugador: Jugador
++ iniciarJuego()
++ getInstancia(): JuegoReinio
++ viajaraUbicacion(destino: Ubicacion): void
++ mejorarAtaqueHeroe(jugador: Jugador, cantidad: int): boolean
++ mejorarDefensaHeroe(jugador: Jugador, cantidad: int): boolean
++ recolectarRecompensa(jugador: Jugador): void
+}
 
-Jugador "1" o- "1" Heroe: controla
+
+Jugador "1" *--- "1" Heroe: controla
 Personaje <|-- Heroe
 Personaje <|-- Criatura
 Heroe <|-- Arquero
@@ -107,12 +114,14 @@ Criatura <|-- Troll
 Criatura <|-- Espectro
 Heroe <-> Pelea: Lucha
 Pelea <-> Criatura: Lucha
-Heroe <|.. Atacable: implementa
-Criatura <|.. Atacable: implementa
 Mapa <-- Jugador: Acceso a Ubicaciones
 Jugador "1" -> "1" Ubicacion: Se encuentra
 Mapa "1" *- "1..*" Ubicacion: contiene
 Ubicacion "1" o--- "0..1" Criatura: contiene
-Ubicacion "1" o- "0..1" Tesoro: contiene
+Ubicacion "1" *- "0..1" Tesoro: contiene
+Ubicacion "1" *- "0..1" Recompensa: contiene
+Jugador "1" o-- "*" Recompensa: contiene
+JuegoReino "1" *-- "1" Jugador: controla acciones
+JuegoReino "1" *-- "1" Mapa: administra ubicaciones
 
 @enduml
