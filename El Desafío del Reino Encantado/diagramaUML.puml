@@ -33,25 +33,37 @@ abstract class Criatura{
 
 class Mago{
 + ganoPelea(criatura: Criatura): void
++ usarHabilidadEspecialAtaque(...): int
++ usarHabilidadEspecialDefensa(...): int
 }
 
 class Guerrero{
 + ganoPelea(criatura: Criatura): void
++ usarHabilidadEspecialAtaque(...): int
++ usarHabilidadEspecialDefensa(...): int
 }
 
 class Arquero{
 - punteria: int
 - agilidad: int
 + ganoPelea(criatura: Criatura): void
++ usarHabilidadEspecialAtaque(...): int
++ usarHabilidadEspecialDefensa(...): int
 }
 
 class Dragon{
++ usarHabilidadEspecialAtaque(...): int
++ usarHabilidadEspecialDefensa(...): int
 }
 
 class Troll{
++ usarHabilidadEspecialAtaque(...): int
++ usarHabilidadEspecialDefensa(...): int
 }
 
 class Espectro{
++ usarHabilidadEspecialAtaque(...): int
++ usarHabilidadEspecialDefensa(...): int
 }
 
 class Pelea{
