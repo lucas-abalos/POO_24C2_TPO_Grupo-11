@@ -9,8 +9,8 @@ public class Personaje {
     public Personaje(String nombre, int nivelAtaque, int nivelDefensa) {
         this.nombre = nombre;
         this.vida = 100;
-        this.nivelAtaque = nivelAtaque;
-        this.nivelDefensa = nivelDefensa;
+        this.nivelAtaque = 0;
+        this.nivelDefensa = 0;
     }
 
     public String getNombre() {

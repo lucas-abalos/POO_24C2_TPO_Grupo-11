@@ -4,8 +4,8 @@ public class Pelea {
     private final Heroe heroe;
     private final Criatura criatura;
 
-    public Pelea(Heroe heroe, Criatura criatura) {
-        this.heroe = heroe;
+    public Pelea(Jugador jugador, Criatura criatura) {
+        this.heroe = jugador.devolverHeroe();
         this.criatura = criatura;
     }
 

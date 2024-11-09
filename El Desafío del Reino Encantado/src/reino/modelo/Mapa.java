@@ -9,7 +9,7 @@ public class Mapa {
     private Ubicacion actual;
     private final List<Ubicacion> ubicaciones;
 
-    public Mapa() {
+    private Mapa() {
         this.ubicaciones = new ArrayList<>();
         Ubicacion puebloNeutral = new Ubicacion( "Pueblo Neutral", new ArrayList<>(), null , null ,null) ;
 
@@ -40,6 +40,10 @@ public class Mapa {
         this.agregarUbicacion(montanaHelada);
         this.agregarUbicacion(bosqueSusurros);
         this.agregarUbicacion(mansionDiddy);
+    }
+
+    public static Mapa iniciarMapa(){
+        return new Mapa();
     }
 
     public void agregarUbicacion(Ubicacion nuevaUbicacion) {

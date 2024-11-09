@@ -3,18 +3,57 @@ package reino.modelo;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Scanner;
 
 public class Jugador {
     private int nivelExperiencia;
     private final Heroe heroe;
     private List<Recompensa> recompensas;
 
-    public Jugador(Heroe heroe) {
+    private Jugador(Heroe heroe) {
         this.nivelExperiencia = 0;
         this.heroe = heroe;
         this.recompensas = new ArrayList<>();
     }
 
+    public static Jugador crearPersonaje() {
+
+        Scanner scanner = new Scanner(System.in);
+        // 2. Elegir la clase del personaje
+        System.out.println("Elige una clase para tu héroe:");
+        System.out.println("1 - Guerrero");
+        System.out.println("2 - Mago");
+        System.out.println("3 - Arquero");
+        int claseSeleccionada = scanner.nextInt();
+        scanner.nextLine();  // Consumir el salto de línea
+
+
+
+        Heroe heroe;
+        switch (claseSeleccionada) {
+            case 1:
+                heroe = new Guerrero();
+                break;
+            case 2:
+                heroe = new Mago();
+                break;
+            case 3:
+                heroe = new Arquero();
+                break;
+            default:
+                System.out.println("Opción inválida, se asignará una clase al azar por defecto.");
+                heroe = new Guerrero();
+                break;
+        }
+
+
+        Jugador jugador  = new Jugador(heroe);
+        // Configurar las estadísticas iniciales del héroe
+
+                // Imprimir resumen del personaje
+
+        return new Jugador(heroe);
+    }
 
     public int getNivelExperiencia(){
         return nivelExperiencia;

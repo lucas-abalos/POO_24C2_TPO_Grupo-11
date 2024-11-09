@@ -1,16 +1,58 @@
 package reino.modelo;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class Arquero extends Heroe{
     private int punteria;
     private int agilidad;
 
-    public Arquero(String nombre, int vida, int nivelAtaque, int nivelDefensa, int punteria, int agilidad) {
-        super(nombre, nivelAtaque, nivelDefensa);
-        this.punteria = punteria;
-        this.agilidad = agilidad;
-    }
+    public Arquero() {
+		super();
+		asignarPuntosEspeciales();
+	}
+	private void asignarPuntosEspeciales() {
+		Scanner scanner = new Scanner(System.in);
+
+		// Asignación de puntos especiales para Arquero: Agilidad y Puntería
+		int puntosRestantes = 10;  // Este valor se ajusta si se desea diferente distribución
+
+		System.out.println("\n\nComo arquero tienes " + puntosRestantes + " puntos adicionales para asignar a agilidad y puntería.");
+
+		while (puntosRestantes > 0) {
+			// Asignar puntos a agilidad
+			System.out.print("¿Cuántos puntos quieres asignar a agilidad? ");
+			int puntosAgilidad = scanner.nextInt();
+			if (puntosAgilidad <= puntosRestantes) {
+				agilidad += puntosAgilidad;
+				puntosRestantes -= puntosAgilidad;
+			} else {
+				System.out.println("No tienes suficientes puntos. Intenta de nuevo.");
+				continue;  // Vuelve a preguntar si los puntos son insuficientes
+			}
+
+			// Asignar puntos a puntería
+			if (puntosRestantes > 0) {
+				System.out.print("¿Cuántos puntos quieres asignar a puntería? ");
+				int puntosPunteria = scanner.nextInt();
+				if (puntosPunteria <= puntosRestantes) {
+					punteria += puntosPunteria;
+					puntosRestantes -= puntosPunteria;
+				} else {
+					System.out.println("No tienes suficientes puntos. Intenta de nuevo.");
+					continue;  // Vuelve a preguntar si los puntos son insuficientes
+				}
+			}
+
+			if (puntosRestantes > 0) {
+				System.out.println("Te quedan " + puntosRestantes + " puntos para asignar. Puedes redistribuir si deseas.");
+			}
+		}
+
+
+		System.out.println("Agilidad: " + agilidad);
+		System.out.println("Puntería: " + punteria);
+	}
 
 	// Método para calcular precisión adicional basada en la puntería del arquero
 	public int calcularPrecision() {

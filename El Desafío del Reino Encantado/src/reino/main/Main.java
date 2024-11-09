@@ -7,46 +7,47 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Mapa mapa = new Mapa();
+        Juego juego = Juego.getInstancia();
+        Mapa mapa = Mapa.iniciarMapa();
         // preguntas heroe
-        Heroe heroe = new Arquero("Guerrero", 10, 2000, 5, 100, 3);
-        Jugador jugador = new Jugador(heroe);
-        heroe.setDuenio(jugador);
-        Scanner scanner = new Scanner(System.in);
-        while (jugador.devolverHeroe().estaVivo() && mapa.getActual().getTesoro() == null) {
-            try {
-
-                //ofrecer opciones
-                if (mapa.getActual().getEnemigo() == null) {
-                    menuNeutral(scanner, jugador);
-                    mapa.viajar();
-                } else {
-                    mapa.viajar(); // Pasar scanner y jugador
-                }
-                //si elige viaje, usar logica de viaje
-
-                List<Criatura> enemigos = mapa.getActual().getEnemigo();
-                if (enemigos != null) {
-                    for (Criatura enemigo : enemigos) {
-                        if (enemigo.estaVivo()) {
-                            Pelea pelea = new Pelea(jugador.devolverHeroe(), enemigo);
-                            pelea.iniciarPelea();
-                            if (mapa.getActual().getRecompensa() != null) {
-                                jugador.agregarRecompensa(mapa.getActual().getRecompensa());
-                            }
-
-                        }
-                    }
-                }
-
-
-        }
-        catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-    }
-        if(mapa.getActual().getTesoro() != null){
-        System.out.println("FELICIDADES! GANASTE");}
+//        Heroe heroe = new Arquero("Guerrero", 10, 2000, 5, 100, 3);
+//        Jugador jugador = new Jugador(heroe);
+//        heroe.setDuenio(jugador);
+//        Scanner scanner = new Scanner(System.in);
+//        while (jugador.devolverHeroe().estaVivo() && mapa.getActual().getTesoro() == null) {
+//            try {
+//
+//                //ofrecer opciones
+//                if (mapa.getActual().getEnemigo() == null) {
+//                    menuNeutral(scanner, jugador);
+//                    mapa.viajar();
+//                } else {
+//                    mapa.viajar(); // Pasar scanner y jugador
+//                }
+//                //si elige viaje, usar logica de viaje
+//
+//                List<Criatura> enemigos = mapa.getActual().getEnemigo();
+//                if (enemigos != null) {
+//                    for (Criatura enemigo : enemigos) {
+//                        if (enemigo.estaVivo()) {
+//                            Pelea pelea = new Pelea(jugador, enemigo);
+//                            pelea.iniciarPelea();
+//                            if (mapa.getActual().getRecompensa() != null) {
+//                                jugador.agregarRecompensa(mapa.getActual().getRecompensa());
+//                            }
+//
+//                        }
+//                    }
+//                }
+//
+//
+//        }
+//        catch(Exception e){
+//            System.out.println(e.getMessage());
+//        }
+//    }
+//        if(mapa.getActual().getTesoro() != null){
+//        System.out.println("FELICIDADES! GANASTE");}
 
 }
 
