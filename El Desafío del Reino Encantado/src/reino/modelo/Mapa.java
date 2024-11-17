@@ -35,6 +35,9 @@ public class Mapa {
 
         bosqueSusurros.agregarAdyacente(puebloNeutral);
         bosqueSusurros.agregarAdyacente(mansionDiddy);
+
+        mansionDiddy.agregarAdyacente(bosqueSusurros);
+        
         this.actual = puebloNeutral;
         this.agregarUbicacion(puebloNeutral);
         this.agregarUbicacion(montanaHelada);
@@ -48,6 +51,10 @@ public class Mapa {
 
     public void agregarUbicacion(Ubicacion nuevaUbicacion) {
         this.ubicaciones.add(nuevaUbicacion);
+    }
+
+    public List<Ubicacion> getUbicaciones(){
+        return ubicaciones;
     }
 
     public Ubicacion getActual(){return this.actual;}
@@ -87,7 +94,4 @@ public class Mapa {
             System.out.println("No se puede viajar a " + actual.getAdyacentes().get(opcion-1).getNombre() + " desde aqui");
         }
     }
-
-
-
 }

@@ -15,11 +15,10 @@ public class Jugador {
         this.recompensas = new ArrayList<>();
     }
 
-
-
     public Heroe devolverHeroe(){
         return heroe;
     }
+    
     public int getNivelExperiencia(){
         return nivelExperiencia;
     }

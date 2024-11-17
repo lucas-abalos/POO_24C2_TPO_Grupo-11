@@ -1,5 +1,7 @@
 package reino.modelo;
 
+import java.util.List;
+
 public class Juego {
     private static Juego instanciaUnica;
     private Mapa mapa;
@@ -17,19 +19,34 @@ public class Juego {
         return instanciaUnica = new Juego();
     }
 
+    public String getUbicacionActual(){
+        return this.mapa.getActual().getNombre();
+    }
 
 
-    public Heroe crearHeroe(String nombre , String tipoHeroe , int puntosAtaque , int puntosDefensa, Integer agilidad, Integer punteria) {
+
+    public void crearHeroe(String nombre , String tipoHeroe , int puntosAtaque , int puntosDefensa, Integer agilidad, Integer punteria) {
+        Heroe heroe;
         switch (tipoHeroe) {
             case "Guerrero":
-                return new Guerrero(nombre , puntosAtaque , puntosDefensa);
+                heroe = new Guerrero(nombre , puntosAtaque , puntosDefensa);
+                break;
             case "Mago":
-                return new Mago(nombre , puntosAtaque , puntosDefensa);
+                heroe = new  Mago(nombre , puntosAtaque , puntosDefensa);
+                break;
             case "Arquero":
-                return new Arquero(nombre , puntosAtaque , puntosDefensa , agilidad , punteria);
+                heroe = new  Arquero(nombre , puntosAtaque , puntosDefensa , agilidad , punteria);
+                break;
                 default:
                     throw new RuntimeException("Error al crear el Heroe");
         }
+        crearJugador(heroe);
+        System.out.println(nombre);
+        System.out.println("Héroe creado a través de Juego singleton:");
+        System.out.println("Nombre: " + heroe.getNombre());
+        System.out.println("Clase: " + tipoHeroe);
+        System.out.println("Ataque: " + heroe.getNivelAtaque());
+        System.out.println("Defensa: " + heroe.getNivelDefensa());
 
     }
 
@@ -42,6 +59,8 @@ public class Juego {
         return this.jugador;
     }
 
-
+    public List<Ubicacion> getTodasUbicaciones(){
+        return this.mapa.getUbicaciones();
+    }
 }
 

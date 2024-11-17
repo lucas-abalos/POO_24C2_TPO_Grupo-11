@@ -1,7 +1,5 @@
 package reino.modelo;
 
-import java.util.Scanner;
-
 public abstract class Heroe extends Personaje implements Atacable{
     private Jugador duenio;
 

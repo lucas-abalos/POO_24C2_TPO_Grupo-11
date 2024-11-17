@@ -1,27 +1,40 @@
 package reino.controller;
-
-import reino.modelo.Heroe;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import javax.swing.SwingUtilities;
 import reino.modelo.Juego;
+import reino.modelo.Ubicacion;
+import reino.view.JugadorPantalla;
+import reino.view.MapaPantalla;
 
 public class JuegoController {
-    static Juego juego;
 
     public static void iniciarJuego() {
-        juego = Juego.getInstancia();
-
+        SwingUtilities.invokeLater(() -> {
+            JugadorPantalla pantalla = new JugadorPantalla();
+            pantalla.setVisible(true);
+        });
     }
-    public static void crearJugador(String nombre, String tipoHeroe, int ataque, int defensa, int agilidad, int punteria) {
-        Heroe heroe = juego.crearHeroe(nombre, tipoHeroe, ataque, defensa, agilidad, punteria);
-        System.out.println(nombre);
-        System.out.println("Héroe creado a través de Juego singleton:");
-        System.out.println("Nombre: " + heroe.getNombre());
-        System.out.println("Clase: " + tipoHeroe);
-        System.out.println("Ataque: " + heroe.getNivelAtaque());
-        System.out.println("Defensa: " + heroe.getNivelDefensa());
-        juego.crearJugador(heroe);
 
+    public static void mostrarPantallaMap(){
+        Map<String, List<String>> ubicacionesAdyacentes = Juego.getInstancia().getTodasUbicaciones()
+            .stream()
+            .collect(Collectors.toMap(
+                Ubicacion::getNombre, // Clave: nombre de la ubicación
+                ubicacion -> ubicacion.getAdyacentes().stream()
+                    .map(Ubicacion::getNombre) // Valor: lista de nombres de ubicaciones adyacentes
+                    .collect(Collectors.toList())
+            ));
+
+        SwingUtilities.invokeLater(() -> {
+            MapaPantalla mapaPantalla = new MapaPantalla(ubicacionesAdyacentes, Juego.getInstancia().getUbicacionActual()); 
+            mapaPantalla.setVisible(true);
+        });
+    }
+
+    
+    public static void crearJugador(String nombre, String tipoHeroe, int ataque, int defensa, int agilidad, int punteria) {
+        Juego.getInstancia().crearHeroe(nombre, tipoHeroe, ataque, defensa, agilidad, punteria);
     }
 }
-
-//heroe = crear heroe()
-//jugador = crearJugador(heroe)
