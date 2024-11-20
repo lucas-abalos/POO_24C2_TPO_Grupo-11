@@ -1,0 +1,35 @@
+@startuml
+Actor USUARIO
+MisionesPantalla -> JuegoController : canjearRecompensas() : boolean
+activate JuegoController
+JuegoController -> Juego :  canjearRecompensas() : boolean
+activate Juego
+Juego -> Juego : esNeutral() : boolean
+alt la ubicacion no es hostil
+Juego -> Jugador :  canjearRecompensas() : boolean
+activate Jugador
+Jugador -> Jugador : hayRecompensas(): boolean
+alt Recompensas no es vacio
+loop hay recompensas sin usar 
+Jugador -> Heroe: mejorarAtaqueHeroe(int incremento , true isRecompensa) : boolean
+activate Heroe
+Heroe -> Heroe : setNivelAtaque() : void
+Heroe --> Jugador : true
+deactivate Heroe
+end
+Jugador --> Juego: true
+deactivate Jugador
+Juego --> JuegoController : true
+deactivate Juego
+JuegoController --> MisionesPantalla : true
+deactivate JuegoController
+else no hay recompensas para canjear
+Jugador --> JuegoController : ExcepcionRecompensasVacio
+JuegoController --> MisionesPantalla : false
+end
+else la ubicacion es hostil
+Juego --> JuegoController : ExcepcionUbicacionHostil
+JuegoController --> MisionesPantalla : false
+
+end
+@enduml
