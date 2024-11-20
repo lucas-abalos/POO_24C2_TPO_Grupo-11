@@ -70,9 +70,13 @@ public class MejoraPersonajePantalla extends JFrame {
                 try {
                     int incremento = Integer.parseInt(campoAtaque.getText());
                     if (incremento <= experienciaActual) {
+                        if (!JuegoController.incrementarAtaque(incremento)) {
+                            JOptionPane.showMessageDialog(null, "No puedes mejorar tu heroe desde esta ubicacion. Viaja a un pueblo neutral!", "Error", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        };
                         experienciaActual -= incremento;
                         labelExperiencia.setText(String.valueOf(experienciaActual));
-                        JuegoController.incrementarAtaque(incremento);
+                        
                         JOptionPane.showMessageDialog(null, "Ataque incrementado exitosamente.");
                     } else {
                         JOptionPane.showMessageDialog(null, "No tienes suficiente experiencia.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -104,9 +108,13 @@ public class MejoraPersonajePantalla extends JFrame {
                 try {
                     int incremento = Integer.parseInt(campoDefensa.getText());
                     if (incremento <= experienciaActual) {
+                        if (!JuegoController.incrementarDefensa(incremento)) {
+                            JOptionPane.showMessageDialog(null, "No puedes mejorar tu heroe desde esta ubicacion. Viaja a un pueblo neutral!", "Error", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        };
                         experienciaActual -= incremento;
                         labelExperiencia.setText(String.valueOf(experienciaActual));
-                        JuegoController.incrementarDefensa(incremento);
+                        
                         JOptionPane.showMessageDialog(null, "Defensa incrementada exitosamente.");
                     } else {
                         JOptionPane.showMessageDialog(null, "No tienes suficiente experiencia.", "Error", JOptionPane.ERROR_MESSAGE);

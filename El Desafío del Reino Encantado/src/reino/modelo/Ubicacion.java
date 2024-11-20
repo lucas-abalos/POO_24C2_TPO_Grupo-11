@@ -37,6 +37,10 @@ public class Ubicacion {
         return enemigos == null || enemigos.size() < 1;
     }
 
+    public boolean esNeutral(){
+        return (this.nombre.toLowerCase().contains("neutral"));
+    }
+
     public void agregarAdyacente (Ubicacion nuevoAdyacente) {
         this.adyacentes.add(nuevoAdyacente);
     }

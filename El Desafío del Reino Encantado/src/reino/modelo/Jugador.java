@@ -97,7 +97,7 @@ public class Jugador {
 
     public boolean mejorarDefensaHeroe(int cantidad, boolean isRecompensa) {
         if (isRecompensa) {
-            heroe.setNivelAtaque(heroe.getNivelAtaque() + cantidad);
+            heroe.setNivelDefensa(heroe.getNivelDefensa() + cantidad);
             System.out.println("Ha mejorado su defensa en " + cantidad + ". Alcanzando los " + heroe.getNivelDefensa() + " puntos.");
             return true;
         }

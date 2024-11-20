@@ -93,11 +93,17 @@ public class Juego {
     }
 
     public boolean incrementarAtaque(int ataque){
+        if(!this.mapa.getActual().esNeutral()){
+            return false;
+        }
         return jugador.mejorarAtaqueHeroe(ataque, false);
     }
 
     public boolean incrementarDefensa(int defensa){
-        return jugador.mejorarAtaqueHeroe(defensa, false);
+        if(!this.mapa.getActual().esNeutral()){
+            return false;
+        }
+        return jugador.mejorarDefensaHeroe(defensa, false);
     }
 
 
