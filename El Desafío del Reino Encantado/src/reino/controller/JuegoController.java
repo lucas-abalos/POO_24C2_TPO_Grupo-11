@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import javax.swing.SwingUtilities;
 import reino.modelo.Juego;
 import reino.modelo.Ubicacion;
+import reino.view.EstadoPersonajePantalla;
 import reino.view.JugadorPantalla;
 import reino.view.MapaPantalla;
 
@@ -26,11 +27,13 @@ public class JuegoController {
                     .map(Ubicacion::getNombre) // Valor: lista de nombres de ubicaciones adyacentes
                     .collect(Collectors.toList())
             ));
+        MapaPantalla mapaPantalla = new MapaPantalla(ubicacionesAdyacentes, Juego.getInstancia().getUbicacionActual()); 
+        mapaPantalla.setVisible(true);
+    }
 
-        SwingUtilities.invokeLater(() -> {
-            MapaPantalla mapaPantalla = new MapaPantalla(ubicacionesAdyacentes, Juego.getInstancia().getUbicacionActual()); 
-            mapaPantalla.setVisible(true);
-        });
+    public static void mostrarPantallaEstadoPersonaje(){
+        var instancia = Juego.getInstancia();
+        EstadoPersonajePantalla estadoPersonajePantalla = new EstadoPersonajePantalla(instancia.getVida(), instancia.getAtaque(), instancia.getDefensa()); 
     }
 
     

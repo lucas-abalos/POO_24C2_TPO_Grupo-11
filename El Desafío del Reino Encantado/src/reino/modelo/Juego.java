@@ -6,6 +6,7 @@ public class Juego {
     private static Juego instanciaUnica;
     private Mapa mapa;
     private Jugador jugador;
+    private Heroe heroe;
     private Pelea pelea;
 
     private Juego() {
@@ -23,6 +24,16 @@ public class Juego {
         return this.mapa.getActual().getNombre();
     }
 
+    public int getVida(){
+        return heroe.getVida(); 
+    }
+
+    public int getAtaque(){
+        return heroe.getNivelAtaque(); 
+    }
+    public int getDefensa(){
+        return heroe.getNivelDefensa(); 
+    }    
 
 
     public void crearHeroe(String nombre , String tipoHeroe , int puntosAtaque , int puntosDefensa, Integer agilidad, Integer punteria) {
@@ -40,6 +51,7 @@ public class Juego {
                 default:
                     throw new RuntimeException("Error al crear el Heroe");
         }
+        this.heroe = heroe;
         crearJugador(heroe);
         System.out.println(nombre);
         System.out.println("Héroe creado a través de Juego singleton:");

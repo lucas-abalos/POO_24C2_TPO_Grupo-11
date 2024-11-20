@@ -123,9 +123,8 @@ public class JugadorPantalla extends JFrame {
 
                     // Mensaje de éxito
                     JOptionPane.showMessageDialog(JugadorPantalla.this, "Héroe creado exitosamente!");
-                    JugadorPantalla.this.dispose();
                     JuegoController.mostrarPantallaMap();
-
+                    dispose();
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(JugadorPantalla.this, "Por favor ingresa números válidos en los campos.");
                 } catch (Exception ex) {
