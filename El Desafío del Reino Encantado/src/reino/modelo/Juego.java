@@ -54,6 +54,9 @@ public class Juego {
                 System.out.println(e);
             }
         }
+        if(mapa.getActual().esNeutral()){
+            heroe.setVida(100);
+        }
         if(mapa.getActual().getTesoro() != null){
             mensajeUbicacion = "GANASTE";
         }

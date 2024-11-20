@@ -18,7 +18,7 @@ public class MapaPantalla extends JFrame {
         this.ubicacionActual = ubicacionActual;
 
         setTitle("Pantalla de Mapa");
-        setSize(600, 400);
+        setSize(700, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout()); // BorderLayout para organizar la ventana
