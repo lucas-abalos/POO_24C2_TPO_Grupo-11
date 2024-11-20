@@ -1,0 +1,59 @@
+@startuml
+View -> JuegoController: viajar(String ubicacionDestino) : void
+activate JuegoController
+    JuegoController -> Juego : viajar(String ubicacionDestino) : void
+    activate Juego
+        Juego -> Mapa : viajar(String ubicacionDestino) : void
+        activate Mapa
+            Mapa -> Mapa : buscarDestino(String ubicacionDestino) : void
+            alt Ubicacion existe
+                Mapa -> Ubicacion : viajar(Ubicacion destino) : Ubicacion
+                activate Ubicacion
+                    Ubicacion -> Ubicacion : esAdyacente(Ubicacion ubicacionDestino) : boolean
+                    alt Se puede viajar porque es adyacente
+                        Ubicacion --> Mapa : destino: Ubicacion
+                        deactivate Ubicacion
+                        Mapa -> Mapa : setActual(Ubicacion destino): void
+                        Mapa --> Juego : void
+                        deactivate Mapa
+                    else el viaje no es posible
+                        Ubicacion --> Juego : ExcepcionViajeInvalido
+                    end
+                else la ubicacion no existe
+                    Mapa --> Juego : ExcepcionDestinoInexistente
+                end
+                deactivate Mapa
+            deactivate Mapa
+        deactivate Juego
+
+    Juego -> Mapa : devolverEnemigos() : List<Criatura>
+    activate Mapa
+        Mapa -> Ubicacion : devolverEnemigos() : List<Criatura>
+        activate Ubicacion
+            Ubicacion --> Mapa : enemigos : List<Criatura>
+        deactivate Ubicacion
+        Mapa --> Juego : enemigos : List<Criatura>
+    deactivate Mapa
+
+    alt Hay enemigos vivos en la nueva ubicacion
+        Juego -> Juego : crearPelea(Heroe miHeroe, Enemigo enemigoDeLaUbicacion)
+        Juego -> Pelea : iniciarPelea() : void
+        activate Pelea
+            loop Mientras heroe siga vivo
+                Pelea -> Pelea : turnoHeroe() : void
+                Pelea -> Pelea : turnoCriatura() : HeroeSigueVivo
+            else Heroe no sigue vivo
+                Pelea --> Juego : ExcepcionMuerte (termina el juego)
+            end
+            Pelea --> Juego : void
+        deactivate Pelea
+    else No hay enemigos vivos
+    end
+
+    Juego --> JuegoController : fin de logicas
+    deactivate Juego
+
+    JuegoController -> JuegoController : siguienteVista() : void
+    JuegoController --> View : vuelve al front/usuario
+deactivate JuegoController
+@enduml
