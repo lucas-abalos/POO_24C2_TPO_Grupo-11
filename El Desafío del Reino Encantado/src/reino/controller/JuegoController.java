@@ -52,7 +52,7 @@ public class JuegoController {
 
     public static void mostrarPantallaEstadoPersonaje(){
         var instancia = Juego.getInstancia();
-        EstadoPersonajePantalla estadoPersonajePantalla = new EstadoPersonajePantalla(instancia.getVida(), instancia.getAtaque(), instancia.getDefensa()); 
+        EstadoPersonajePantalla estadoPersonajePantalla = new EstadoPersonajePantalla(instancia.getVida(), instancia.getAtaque(), instancia.getDefensa() , instancia.getAgilidad() , instancia.getPunteria()); 
     }
 
     public static void mostrarPantallaMisiones(){

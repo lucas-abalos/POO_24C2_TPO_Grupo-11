@@ -84,6 +84,13 @@ public class Juego {
         return heroe.getNivelDefensa(); 
     }    
 
+    public int getAgilidad(){
+        return heroe.getAgilidad();
+    }
+
+    public int getPunteria(){
+        return heroe.getPunteria();
+    }
     public int getCantidadExperiencia(){
         return jugador.getNivelExperiencia();
     }

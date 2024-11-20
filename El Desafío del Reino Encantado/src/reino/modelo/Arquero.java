@@ -15,6 +15,11 @@ public class Arquero extends Heroe{
 
 
     @Override
+    public int getAgilidad(){return this.agilidad;}
+    @Override
+    public int getPunteria(){return this.punteria;}
+
+    @Override
     public int usarHabilidadEspecialAtaque(Personaje defensor, int cantGolpes) {
         Random random = new Random();
         int numeroAleatorio = random.nextInt(100); // Generar un número aleatorio entre 0 y 99
