@@ -1,13 +1,14 @@
 package reino.modelo;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Juego {
     private static Juego instanciaUnica;
     private Mapa mapa;
     private Jugador jugador;
     private Heroe heroe;
-    private Pelea pelea;
 
     private Juego() {
         this.mapa = Mapa.iniciarMapa();
@@ -24,6 +25,54 @@ public class Juego {
         return this.mapa.getActual().getNombre();
     }
 
+    public String viajar(String nombreUbicacion){
+        Ubicacion ubicacionActual;
+
+        mapa.viajarUbicacion(nombreUbicacion);
+
+        ubicacionActual = mapa.getActual();
+        String mensajeUbicacion = mapa.getActual().obtenerDescripcionCompleta();
+
+        // Si viajo a una ubicación Hostil inicio la pelea
+        if(!ubicacionActual.esPacifica()){
+            try {
+                List<Criatura> enemigos = mapa.getActual().getEnemigo();
+                if (enemigos != null) {
+                    for (Criatura enemigo : enemigos) {
+                        if (enemigo.estaVivo()) {
+                            Pelea pelea = new Pelea(jugador, enemigo);
+                            pelea.iniciarPelea();
+                        }
+                    }
+                    if (mapa.getActual().getRecompensa() != null) {
+                        jugador.agregarRecompensa(mapa.getActual().getRecompensa());
+                    }
+                    mapa.getActual().vaciarEnemigos();
+                    mapa.getActual().vaciarRecompensa();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+        if(mapa.getActual().getTesoro() != null){
+            mensajeUbicacion = "GANASTE";
+        }
+        if(!heroe.estaVivo()){
+            mensajeUbicacion = "PERDISTE";
+        }
+        return mensajeUbicacion;
+    }
+
+    public Map<String, Boolean> getDatosRecompensa() {
+        List<Recompensa> recompensas = mapa.getRecompensas(); 
+        Map<String, Boolean> listaMisiones = new HashMap<>(); 
+        
+        for (Recompensa recompensa : recompensas) {
+            listaMisiones.put(recompensa.toString(), recompensa.getEstadoUso());
+        }
+        return listaMisiones;
+    }
+
     public int getVida(){
         return heroe.getVida(); 
     }
@@ -34,6 +83,22 @@ public class Juego {
     public int getDefensa(){
         return heroe.getNivelDefensa(); 
     }    
+
+    public int getCantidadExperiencia(){
+        return jugador.getNivelExperiencia();
+    }
+
+    public boolean canjearRecompensas(){
+        return jugador.intercambiarRecompensas();
+    }
+
+    public boolean incrementarAtaque(int ataque){
+        return jugador.mejorarAtaqueHeroe(ataque, false);
+    }
+
+    public boolean incrementarDefensa(int defensa){
+        return jugador.mejorarAtaqueHeroe(defensa, false);
+    }
 
 
     public void crearHeroe(String nombre , String tipoHeroe , int puntosAtaque , int puntosDefensa, Integer agilidad, Integer punteria) {

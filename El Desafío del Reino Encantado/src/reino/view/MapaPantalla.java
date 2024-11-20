@@ -18,7 +18,7 @@ public class MapaPantalla extends JFrame {
         this.ubicacionActual = ubicacionActual;
 
         setTitle("Pantalla de Mapa");
-        setSize(400, 400);
+        setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout()); // BorderLayout para organizar la ventana
@@ -33,6 +33,30 @@ public class MapaPantalla extends JFrame {
         botonEstado.setEnabled(true);
         botonEstado.setBackground(new Color(144, 238, 144)); // Verde claro (Light Green)
 
+        JButton botonMisiones = new JButton("Misiones y Recompensas");
+        botonMisiones.setEnabled(true);
+        botonMisiones.setBackground(new Color(144, 238, 144)); // Verde claro (Light Green)
+
+        JButton botonMejoraPersonaje = new JButton("Mejora Personaje");
+        botonMejoraPersonaje.setEnabled(true);
+        botonMejoraPersonaje.setBackground(new Color(144, 238, 144)); // Verde claro (Light Green)
+
+        botonMisiones.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JuegoController.mostrarPantallaMisiones();
+                dispose();
+            }
+        });
+
+        botonMejoraPersonaje.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JuegoController.mostrarPantallaMejoraPersonaje();
+                dispose();
+            }
+        });
+
         botonEstado.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -40,14 +64,22 @@ public class MapaPantalla extends JFrame {
                 dispose();
             }
         });
-
+        panelSuperior.add(botonMisiones);
         panelSuperior.add(botonEstado);
+        panelSuperior.add(botonMejoraPersonaje);
         add(panelSuperior, BorderLayout.NORTH); // Añadir el panel superior al norte del layout
 
         // Crear el panel principal para los botones de ubicaciones
         JPanel panelPrincipal = new JPanel();
         panelPrincipal.setLayout(new BoxLayout(panelPrincipal, BoxLayout.Y_AXIS)); 
         panelPrincipal.setAlignmentX(Component.CENTER_ALIGNMENT); // Centrar los elementos en el panel
+
+        // Etiqueta de experiencia actual
+        JLabel labelExperiencia = new JLabel("Seleccioná la posición a la cual viajar");
+        labelExperiencia.setFont(new Font("Arial", Font.BOLD, 16));
+        labelExperiencia.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panelPrincipal.add(labelExperiencia);
+        panelPrincipal.add(Box.createRigidArea(new Dimension(0, 20))); // Espaciado
 
         for (String nombreUbicacion : ubicacionesAdyacentes.keySet()) {
             JPanel panel = new JPanel();
@@ -58,6 +90,41 @@ public class MapaPantalla extends JFrame {
             // Verificar si la ubicación es adyacente a la ubicación actual
             if (ubicacionesAdyacentes.get(ubicacionActual).contains(nombreUbicacion)) {
                 boton.setEnabled(true); // Habilitar el botón si es adyacente
+                boton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        String resultadoDelViaje = JuegoController.viajar(nombreUbicacion); 
+                        dispose(); // Cerrar la pantalla actual
+
+                        switch (resultadoDelViaje) {
+                            case "GANASTE":
+                                JuegoController.mostrarPantallaVictoria();
+                                break;
+                            case "PERDISTE":
+                                JuegoController.mostrarPantallaDerrota();
+                                break;
+                            default:
+                                JuegoController.mostrarPantallaMap();
+                                // Mostrar el mensaje en un JOptionPane
+                                JTextArea textArea = new JTextArea(resultadoDelViaje);
+                                textArea.setEditable(false);
+                                textArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
+                                textArea.setWrapStyleWord(true);
+                                textArea.setLineWrap(true);
+                                textArea.setBackground(null);
+        
+                                JScrollPane scrollPane = new JScrollPane(textArea);
+                                scrollPane.setPreferredSize(new Dimension(400, 200));
+        
+                                JOptionPane.showMessageDialog(
+                                    MapaPantalla.this, // Correctly pass the parent component, or null if no parent
+                                    scrollPane, // The content of the dialog
+                                    "Resultado del Viaje", // The title of the dialog
+                                    JOptionPane.INFORMATION_MESSAGE // The message type
+                                );
+                        }
+                    }
+                });
             } else {
                 if (!nombreUbicacion.equals(ubicacionActual)) {
                     boton.setEnabled(false); // Deshabilitar el botón si no es adyacente
@@ -66,7 +133,7 @@ public class MapaPantalla extends JFrame {
             }
 
             if (nombreUbicacion.equals(ubicacionActual)) {
-                JLabel flechaLabel = new JLabel("<<<");
+                JLabel flechaLabel = new JLabel("<<< Posición Actual");
                 panel.add(boton); 
                 panel.add(flechaLabel);
             } else {

@@ -7,6 +7,7 @@ public class Recompensa {
     private final float porcentajeDefensa;
     private final int cantidadAtaque;
     private final float porcentajeAtaque;
+    private boolean canjeado;
 
     public Recompensa(String descripcion, String premio, int cantidadDefensa, float porcentajeDefensa, int cantidadAtaque, float porcentajeAtaque) {
         this.descripcion = descripcion;
@@ -15,6 +16,15 @@ public class Recompensa {
         this.porcentajeDefensa = porcentajeDefensa;
         this.cantidadAtaque = cantidadAtaque;
         this.porcentajeAtaque = porcentajeAtaque;
+        this.canjeado = false;
+    }
+
+    public boolean getEstadoUso(){
+        return canjeado;
+    }
+
+    public void setUsado(){
+        this.canjeado = true;
     }
 
     public String getDescipcion(){
@@ -36,6 +46,6 @@ public class Recompensa {
         return porcentajeAtaque;
     }
     public String toString() {
-        return this.premio + "\n" + this.descripcion;
+        return this.premio + ", \n" + this.descripcion;
     }
 }

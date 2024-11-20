@@ -2,27 +2,30 @@ package reino.modelo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 
 public class Mapa {
     private Ubicacion actual;
     private final List<Ubicacion> ubicaciones;
+    private final List<Recompensa> recompensas;
 
     private Mapa() {
+        this.recompensas = new ArrayList<>();
         this.ubicaciones = new ArrayList<>();
         Ubicacion puebloNeutral = new Ubicacion( "Pueblo Neutral", new ArrayList<>(), null , null ,null) ;
 
-        Dragon dragon = new Dragon("Drogon del Norte" , 15 , 20 , 120);
+        Dragon dragon = new Dragon("Drogon del Norte" , 1 , 1 , 120);
         Recompensa recompensa1 = new Recompensa("Aumenta el ataque un 20%" , "Fentanilo" , 0 , 0, 0 , 0.2f);
+        this.recompensas.add(recompensa1);
         Ubicacion montanaHelada = new Ubicacion("Montañas Heladas", new ArrayList<>() , new ArrayList<>(List.of(dragon)) , null, recompensa1);
 
-        Espectro espectro = new Espectro("Jeffrey Epstein" , 35 , 12 , 12);
+        Espectro espectro = new Espectro("Jeffrey Epstein" , 2 , 2, 12);
         Recompensa recompensa2 = new Recompensa("Aumenta la defensa en un 15%" , "Amuleto de Proteccion" , 0 , 0.15f, 0 , 0);
+        this.recompensas.add(recompensa2);
         Ubicacion bosqueSusurros = new Ubicacion("Bosque susurros", new ArrayList<>() , new ArrayList<>(List.of(espectro)) , null, recompensa2);
 
-        Espectro enemigo1 = new Espectro("Mangieri" , 234 , 19 , 999);
-        Troll enemigo2 = new Troll("Diddy P" , 35 , 121 , 999);
+        Espectro enemigo1 = new Espectro("Mangieri" , 3 , 4 , 999);
+        Troll enemigo2 = new Troll("Diddy P" , 2 , 1, 999);
         Tesoro tesoro = new Tesoro("condicion VICTORIA");
         Ubicacion mansionDiddy = new Ubicacion("La fiesta blanca", new ArrayList<>() , new ArrayList<>(List.of(enemigo1 , enemigo2)) , tesoro, null);
 
@@ -49,6 +52,9 @@ public class Mapa {
         return new Mapa();
     }
 
+    public List<Recompensa> getRecompensas(){
+        return this.recompensas;
+    }
     public void agregarUbicacion(Ubicacion nuevaUbicacion) {
         this.ubicaciones.add(nuevaUbicacion);
     }
@@ -57,41 +63,18 @@ public class Mapa {
         return ubicaciones;
     }
 
-    public Ubicacion getActual(){return this.actual;}
 
-
-    public void viajar(){
-        System.out.println("A donde quieres viajar?");
-        this.actual.verViajes();
-        Scanner myObj = new Scanner(System.in);
-        try {
-            int destino = myObj.nextInt();
-            this.viajarAUbicacion(destino);
-        } catch (Exception e) {
-            throw new RuntimeException("Elija un destino valido!");
-        }
-
-    }
-
-    private void viajarAUbicacion(int opcion) {
-        Ubicacion destino = this.actual.Viajar(opcion);
-        if (destino != null) {
-            if (destino.getEnemigo() != null && destino.getEnemigo().getFirst().estaVivo()) {
-                Scanner scanner = new Scanner(System.in);
-                System.out.println("La ubicación elegida es hostil. ¿Seguro que desea viajar (Y)?: ");
-                String respuesta = scanner.nextLine().trim().toUpperCase(); // Convertir a mayúscula para evitar problemas de case
-
-                if (!"Y".equals(respuesta)) {
-                    System.out.println("Decides no viajar...");
-                    return;
-               }
-
+    public void viajarUbicacion(String nombreUbicacion){
+        for (Ubicacion ubicacion : ubicaciones) {
+            if (ubicacion.getNombre().equalsIgnoreCase(nombreUbicacion)) {
+                // Verificar si la ubicación es adyacente a la ubicación actual
+                if (actual.getAdyacentes().contains(ubicacion)) {
+                    this.actual = ubicacion; // Actualizar la ubicación actual
+                }
+                return; // Salir del método una vez encontrada la ubicación
             }
-
-            this.actual = destino;
-            System.out.println("Te encuentras en " + this.actual.getNombre());
-        } else {
-            System.out.println("No se puede viajar a " + actual.getAdyacentes().get(opcion-1).getNombre() + " desde aqui");
         }
     }
+
+    public Ubicacion getActual(){return this.actual;}
 }
