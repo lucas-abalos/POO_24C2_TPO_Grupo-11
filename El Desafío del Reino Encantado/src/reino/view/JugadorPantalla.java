@@ -2,6 +2,8 @@ package reino.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.management.RuntimeErrorException;
 import javax.swing.*;
 import reino.controller.JuegoController;
 
@@ -119,6 +121,9 @@ public class JugadorPantalla extends JFrame {
 
 
                     // Crear el héroe y asignarlo al jugador a través del JuegoController
+                    if (ataque == 0 || defensa  == 0 || ((agilidad  == 0 || punteria == 0) && claseSeleccionada.equals("Arquero"))) {
+                        throw new NumberFormatException();
+                    }
                     JuegoController.crearJugador(nombre, claseSeleccionada, ataque, defensa, agilidad, punteria);
 
                     // Mensaje de éxito

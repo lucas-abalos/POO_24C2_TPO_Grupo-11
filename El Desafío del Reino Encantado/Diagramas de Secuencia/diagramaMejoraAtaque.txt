@@ -1,0 +1,35 @@
+@startuml
+Actor USUARIO
+MejoraPersonajePantalla -> JuegoController : incrementarAtaque(int incremento) : boolean
+activate JuegoController
+JuegoController -> Juego :  incrementarAtaque(int incremento) : boolean
+activate Juego
+Juego -> Juego : esNeutral() : boolean
+alt La ubicacion es neutral
+Juego -> Jugador :  mejorarAtaqueHeroe(int incremento , false isRecompensa) : boolean
+activate Jugador
+alt cantidad de incremento es valida
+Jugador -> Heroe : mejorarAtaqueHeroe(int incremento) : boolean
+activate Heroe
+Heroe -> Heroe : setNivelAtaque() : void
+Heroe --> Jugador : true
+deactivate Heroe
+Jugador --> Juego: true
+deactivate Jugador
+Juego --> JuegoController : true
+deactivate Juego
+JuegoController --> MejoraPersonajePantalla : true
+deactivate JuegoController
+else incremento es mayor que la experiencia disponible
+Jugador --> JuegoController: excepcionExperienciaInsuficiente 
+JuegoController --> MejoraPersonajePantalla : false
+end
+else la ubicacion no es neutral
+Juego--> JuegoController: excepcionUbicacionHostil
+JuegoController --> MejoraPersonajePantalla : false
+
+end
+
+
+
+@enduml

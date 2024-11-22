@@ -1,0 +1,230 @@
+[33mcommit 4ddd17d6f1ca54c092c785a8cad89b0a296ffb63[m[33m ([m[1;36mHEAD[m[33m, [m[1;31morigin/test[m[33m, [m[1;32mtest[m[33m)[m
+Author: PatricioPlem <pplem@uade.edu.ar>
+Date:   Wed Nov 20 18:23:08 2024 -0300
+
+    bug fix to improve defense
+
+[33mcommit f15fcf68a1ea805adf8266ec6baed01b3c84c819[m
+Author: PatricioPlem <pplem@uade.edu.ar>
+Date:   Wed Nov 20 18:06:07 2024 -0300
+
+    diagramas mejora heroe y reclamo recompensas
+
+[33mcommit 39a9d0e0f62bf63bc1db9e0494dd492c986926f8[m
+Author: lucas-abalos <lucas22abalos@gmail.com>
+Date:   Wed Nov 20 15:03:13 2024 -0300
+
+    Juego finalizado
+    
+    Juego finalizado
+
+[33mcommit 0bae4dc3bb51d70d96208f294878a92a7ef89e8e[m
+Author: lucas-abalos <lucas22abalos@gmail.com>
+Date:   Tue Nov 19 23:13:59 2024 -0300
+
+    Pantalla de Estado de Personaje y Correcciones
+    
+    Pantalla de Estado de Personaje y Correcciones de código
+
+[33mcommit 37127d6396deae07f57b3a52299a3bcf0e77dec2[m
+Author: lucas-abalos <lucas22abalos@gmail.com>
+Date:   Sun Nov 17 15:02:09 2024 -0300
+
+    Pantalla de Mapa terminada
+    
+    Pantalla de Mapa terminada
+
+[33mcommit 564713436a432ddfcf968ad8acf6c69b88f49d5b[m
+Author: Patricio Plem <patorafael.2000@gmail.com>
+Date:   Sat Nov 9 22:11:15 2024 -0300
+
+    Pantalla crear Jugador. Pide datos, llama a controller, se usa el singleton de juego para conectar heroe, lo crea, crea el jugador usando el heroe. Joya
+
+[33mcommit 2cd3fe4d9e161dacebb8685c5552ca9d78e889ba[m
+Author: Patricio Plem <patorafael.2000@gmail.com>
+Date:   Fri Nov 8 23:35:26 2024 -0300
+
+    Avances en la division de responsabilidades y se crea la logica de iniciar juego creando un heroe y asignadole puntos a preferencia
+
+[33mcommit 705b3d67de27fc8cfa8e32539c5185536141fd96[m
+Merge: 9e503b6 5e81009
+Author: lucas-abalos <lucas22abalos@gmail.com>
+Date:   Mon Oct 28 12:35:31 2024 -0300
+
+    Merge pull request #7 from lucas-abalos/main
+    
+    Actualización de TEST luego de primera corrección.
+
+[33mcommit 5e810094249ceb0ef463d8920c36a816a24b3d5f[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: lucas-abalos <lucas22abalos@gmail.com>
+Date:   Mon Oct 28 12:32:34 2024 -0300
+
+    Limpieza de Main LUEGO DE PRIMERA CORRECCIÓN
+    
+    Limpieza de Main LUEGO DE PRIMERA CORRECCIÓN
+
+[33mcommit 86b7304a23becb7730574538896383fa469db4dc[m
+Merge: 3a1c32d 04f24de
+Author: lucas-abalos <lucas22abalos@gmail.com>
+Date:   Mon Oct 28 12:26:36 2024 -0300
+
+    Merge pull request #6 from lucas-abalos/test-integracion
+    
+    test-integracion
+
+[33mcommit 04f24dee320519e31d6300e9d90a88486c8c9302[m
+Author: lucas-abalos <lucas22abalos@gmail.com>
+Date:   Mon Oct 28 12:25:25 2024 -0300
+
+    Correcciones en diagrama UML
+    
+    Correcciones en diagrama UML luego de feedback de primer entrega. Se agrega la capa fachada.
+
+[33mcommit 3a1c32d26f1159c39a335c241607a18c31d80e69[m
+Author: Juan Elliff <elliffjuan3@gmail.com>
+Date:   Wed Oct 16 16:51:23 2024 -0300
+
+    Reemplazo de archivos JPG en el proyecto
+
+[33mcommit 3cea1ad6382fe3845b38660a43a0c9df840588d8[m
+Author: Patricio Plem <patorafael.2000@gmail.com>
+Date:   Wed Oct 16 01:04:08 2024 -0300
+
+    minor changes
+
+[33mcommit 6c858d87c772376accc4ceac3b6c413a80188543[m
+Author: Patricio Plem <patorafael.2000@gmail.com>
+Date:   Wed Oct 16 01:00:31 2024 -0300
+
+    Integracion de todas las clases del juego para que sea funcional de principio
+    a fin
+
+[33mcommit 5e885c9c2762dca0be788f31bc88d37e48e76a63[m
+Merge: 9a34b66 65f6374
+Author: lucas-abalos <lucas22abalos@gmail.com>
+Date:   Tue Oct 15 21:52:18 2024 -0300
+
+    Merge pull request #5 from lucas-abalos/mapa
+    
+    mergeo mapa con test-integracion
+
+[33mcommit 65f6374959452f49c066261c8caa2d64a0348cbe[m
+Author: Patricio Plem <patorafael.2000@gmail.com>
+Date:   Tue Oct 15 01:22:26 2024 -0300
+
+    "base para manejar los viajes. Falta pensar como se inician las peleas (sin llenar todo de ifs)"
+
+[33mcommit 4f4b4615b64c700eac00c3994d061255eb915de1[m
+Merge: 661c4aa 9a34b66
+Author: Patricio Plem <patorafael.2000@gmail.com>
+Date:   Mon Oct 14 22:27:40 2024 -0300
+
+    Merge remote-tracking branch 'origin/main' into mapa
+
+[33mcommit 9a34b66246588115bdcd025a81347854d51ac36b[m
+Author: lucas-abalos <lucas22abalos@gmail.com>
+Date:   Sun Oct 13 22:59:43 2024 -0300
+
+    Recompensa y Mejoras de Personaje
+    
+    Se añade la lógica de Recompensa y que se puedan ir acumulando para luego reclamarlas.
+    Se añade la lógica para que se pueda ir mejorando el personaje, la defensa y el ataque intercambiando por puntos de experiencia.
+
+[33mcommit b0c974988fd4043d63735f801a76d0486df7cbf6[m
+Merge: 0c67b8b 9e503b6
+Author: lucas-abalos <lucas22abalos@gmail.com>
+Date:   Sun Oct 13 21:44:34 2024 -0300
+
+    Merge pull request #4 from lucas-abalos/test
+    
+    Actualización de Main con implementación de código de Pelea de Test
+
+[33mcommit 0c67b8b86da830c0493deee47cdf2977d97e5fed[m
+Merge: d130487 5e8c485
+Author: lucas-abalos <lucas22abalos@gmail.com>
+Date:   Sun Oct 13 21:39:55 2024 -0300
+
+    Merge pull request #2 from lucas-abalos/test-DiagramasDeSecuencia
+    
+    Se agregan los 3 diagramas de Secuencia
+
+[33mcommit d130487cbf81a92515729177ee8aa4a25afaa5ed[m
+Merge: 54b3c53 6fc38b0
+Author: lucas-abalos <lucas22abalos@gmail.com>
+Date:   Sun Oct 13 21:39:18 2024 -0300
+
+    Merge pull request #1 from lucas-abalos/test-DiagramaUML
+    
+    Test diagrama uml
+
+[33mcommit 661c4aaf3ec3b248bdb1c8033780dad66871a730[m
+Author: Patricio Plem <pWX1358075@china.huawei.com>
+Date:   Fri Oct 11 18:30:07 2024 -0300
+
+    Minor changes
+
+[33mcommit 0e42edd9a737d08648bcab323a5d5fe540af73ec[m
+Author: Patricio Plem <pWX1358075@china.huawei.com>
+Date:   Wed Oct 9 19:36:38 2024 -0300
+
+    Creado un mapa y ubicaciones basicos que permiten entender la logica de los viajes entre ubicaciones
+
+[33mcommit 5e8c48531f8ca5f5c958600ad1cdb1bc2af706a3[m
+Author: alu565 <agusgonza2000@gmail.com>
+Date:   Wed Oct 2 21:10:44 2024 -0300
+
+    diagramas de secuencia agregados
+
+[33mcommit 6fc38b0547dd3638b1f24ace243bf297c80df9f3[m
+Author: lucas-abalos <lucas22abalos@gmail.com>
+Date:   Tue Oct 1 23:04:04 2024 -0300
+
+    Ajustes en diagrama UML
+    
+    Ajustes en diagrama UML luego de la implementación de Pelea
+
+[33mcommit 9e503b62695266df42f1162042fd858d0d3cabdc[m
+Author: lucas-abalos <lucas22abalos@gmail.com>
+Date:   Tue Oct 1 22:30:31 2024 -0300
+
+    Aumentar Experiencia al Finalizar Batalla
+    
+    Agrego la lógica para aumentar el nivel de experiencia del jugador si finaliza una batalla
+
+[33mcommit f9fb3c3058aaa41379cb9ee981af0599c2be3a21[m
+Author: lucas-abalos <lucas22abalos@gmail.com>
+Date:   Tue Oct 1 22:11:41 2024 -0300
+
+    Implementación curar Vida Mago
+    
+    Agregué el método abstracto en Heroe que todos los heroes deben implemenar. Para el caso específico de los magos que cuando finalicen una pelea curen su vida al %100.
+
+[33mcommit a6b2f743c25c782ba2f869573705ffe1db5b654b[m
+Author: lucas-abalos <lucas22abalos@gmail.com>
+Date:   Mon Sep 30 19:46:40 2024 -0300
+
+    Fin de la implementación de la lógica PELEA
+    
+    Se termina de verificar todas las habilidades especiales de defensa y ataque de todos los personajes
+    Dragon:
+            - cuando lucha contra guerreros, su nivel de ataque aumenta un 30%
+    Troll:
+            - cuando lucha contra magos, su nivel de defensa aumenta un 15%
+    Espectro:
+            - cuando lucha contra arqueros, su nivel de ataque aumenta un 20%
+    Guerrero:
+            - A partir del tercer golpe de ataque, el poder de ataque se duplica por el resto de la pelea.
+            - Derriba Trolls de un solo golpe
+    Mago:
+            - Inmune contra espectros
+    Arquero:
+            - La agilidad hace que X golpes de cada 100 recibidos puedan ser esquivados y no recibir daño. Por ejemplo, una agilidad de 20 hace que haya una probabilidad del 20% de esquivar el golpe.
+            - Cuando lucha contra Dragones, su puntería es 100%
+
+[33mcommit a95178b94217dd1b549f702ffff04fd62fc4e3f0[m
+Author: lucas-abalos <lucas22abalos@gmail.com>
+Date:   Mon Sep 30 19:17:15 2024 -0300
+
+    Arreglo errores de compilacion y funciones faltantes
+    
+    Arreglo e
