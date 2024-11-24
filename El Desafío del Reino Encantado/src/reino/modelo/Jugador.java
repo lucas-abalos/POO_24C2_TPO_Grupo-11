@@ -15,12 +15,12 @@ public class Jugador {
         this.recompensas = new ArrayList<>();
     }
 
-
-    public int getNivelExperiencia(){
-        return nivelExperiencia;
-    }
     public Heroe devolverHeroe(){
         return heroe;
+    }
+    
+    public int getNivelExperiencia(){
+        return nivelExperiencia;
     }
 
     public void agregarRecompensa(Recompensa recompensa) {
@@ -33,14 +33,16 @@ public class Jugador {
         System.out.println("Conseguiste la siguiente recompensa: " + recompensa);
     }
 
-    public void intercambiarRecompensas() {
+    public boolean intercambiarRecompensas() {
         if (recompensas == null || recompensas.isEmpty()) {
-            return;  // No hay recompensas para intercambiar
+            return false;  // No hay recompensas para intercambiar
         }
         // Uso Iterator para eliminar recompensas mientras itera
         Iterator<Recompensa> iterator = recompensas.iterator();
         while (iterator.hasNext()) {
             Recompensa recompensa = iterator.next();
+
+            recompensa.setUsado(); // Marca la recompensa como usada
     
             if(recompensa.getCantidadAtaque() > 0){
                 mejorarAtaqueHeroe(recompensa.getCantidadAtaque() , true);
@@ -67,6 +69,7 @@ public class Jugador {
             // Eliminar la recompensa una vez utilizada
             iterator.remove();
         }
+        return true;
     }
 
     public void incrementarExperiencia(int cantidad){
@@ -94,7 +97,7 @@ public class Jugador {
 
     public boolean mejorarDefensaHeroe(int cantidad, boolean isRecompensa) {
         if (isRecompensa) {
-            heroe.setNivelAtaque(heroe.getNivelAtaque() + cantidad);
+            heroe.setNivelDefensa(heroe.getNivelDefensa() + cantidad);
             System.out.println("Ha mejorado su defensa en " + cantidad + ". Alcanzando los " + heroe.getNivelDefensa() + " puntos.");
             return true;
         }

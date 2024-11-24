@@ -1,8 +1,9 @@
 package reino.modelo;
 
 public class Mago extends Heroe{
-    public Mago(String nombre, int nivelAtaque, int nivelDefensa) {
-        super(nombre, nivelAtaque, nivelDefensa);
+    public Mago(String nombre, int nivelAtaque , int nivelDefensa) {
+        super(nombre,nivelAtaque,nivelDefensa);
+
     }
 
     @Override
